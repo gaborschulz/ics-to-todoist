@@ -8,7 +8,8 @@ from todoist.api import TodoistAPI
 
 # Regex pattern for relevant names
 RELEVANT_NAMES = ["Restmüll", "Blaue Tonne", "Gelber Sack"]
-TARGET_PROJECT = "GOA"
+TARGET_PROJECT = "GOA 🗑"
+
 REMINDER_TIMES = [timedelta(hours=5),
                   timedelta(hours=5, minutes=15),
                   timedelta(hours=5, minutes=30),
@@ -34,7 +35,7 @@ def get_relevant_events(filename: str):
 
 def get_project_by_name(TARGET_PROJECT, api):
     for project in api.projects.state["projects"]:
-        if project["name"] == TARGET_PROJECT:
+        if re.match(TARGET_PROJECT, project["name"]):
             return project["id"]
 
     return None
