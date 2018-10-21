@@ -35,7 +35,7 @@ def get_relevant_events(filename: str):
 
 def get_project_by_name(TARGET_PROJECT, api):
     for project in api.projects.state["projects"]:
-        if re.match(TARGET_PROJECT, project["name"]):
+        if re.fullmatch(TARGET_PROJECT, project["name"], flags=re.IGNORECASE):
             return project["id"]
 
     return None
