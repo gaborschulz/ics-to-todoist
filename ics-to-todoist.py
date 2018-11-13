@@ -12,6 +12,7 @@ from todoist.api import TodoistAPI
 # RELEVANT_NAMES = ["Restmüll", "Blaue Tonne", "Gelber Sack"]
 RELEVANT_NAMES = ["Betriebliche Steuerpraxis"]
 TARGET_PROJECT = "Education 🎓"
+DEFAULT_REMINDER = True
 
 reminder_struct = namedtuple("reminder_struct", "hour, minute, dayoffset, houroffset, minuteoffset")
 REMINDER_TIMES = [reminder_struct(hour=0, minute=0, dayoffset=0, houroffset=0, minuteoffset=-15)]
@@ -69,7 +70,7 @@ def main():
     project_id = get_project_by_name(api, TARGET_PROJECT)
     for event in relevant_events.events:
         print(f"{event.name}: {event.begin}...", end="")
-        add_task(api, event.name, event.begin, project_id, auto_reminder=True)
+        add_task(api, event.name, event.begin, project_id, auto_reminder=DEFAULT_REMINDER)
         print("Done")
 
 
