@@ -42,12 +42,9 @@ def get_project_by_name(api: TodoistAPI, target_project: str):
     return None
 
 
-def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, direct_reminder: bool):
+def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, auto_reminder: bool):
     task_due = due.isoformat()
-    item = api.items.add(content=task_name, project_id=project_id, date_string=task_due)
-
-    if direct_reminder:
-        api.reminders.add(item_id=item.temp_id, service="push", type="absolute", due_date_utc=due.isoformat())
+    item = api.items.add(content=task_name, project_id=project_id, date_string=task_due, auto_reminder=auto_reminder)
 
     for td in REMINDER_TIMES:
         if td.hour != 0 or td.minute != 0:
@@ -72,7 +69,7 @@ def main():
     project_id = get_project_by_name(api, TARGET_PROJECT)
     for event in relevant_events.events:
         print(f"{event.name}: {event.begin}...", end="")
-        add_task(api, event.name, event.begin, project_id, direct_reminder=True)
+        add_task(api, event.name, event.begin, project_id, auto_reminder=True)
         print("Done")
 
 
