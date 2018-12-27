@@ -10,12 +10,12 @@ from todoist.api import TodoistAPI
 
 # Regex pattern for relevant names
 # RELEVANT_NAMES = ["Restmüll", "Blaue Tonne", "Gelber Sack"]
-RELEVANT_NAMES = ["Betriebliche Steuerpraxis"]
-TARGET_PROJECT = "Education 🎓"
-DEFAULT_REMINDER = True
+RELEVANT_NAMES = ["Bioabfall"]
+TARGET_PROJECT = "GOA"
+DEFAULT_REMINDER = False
 
 reminder_struct = namedtuple("reminder_struct", "hour, minute, dayoffset, houroffset, minuteoffset")
-REMINDER_TIMES = [reminder_struct(hour=0, minute=0, dayoffset=0, houroffset=0, minuteoffset=-15)]
+REMINDER_TIMES = [reminder_struct(hour=5, minute=0, dayoffset=0, houroffset=0, minuteoffset=0)]
 
 
 def get_relevant_events(filename: str):
@@ -37,7 +37,7 @@ def get_relevant_events(filename: str):
 
 def get_project_by_name(api: TodoistAPI, target_project: str):
     for project in api.projects.state["projects"]:
-        if re.fullmatch(target_project, project["name"], flags=re.IGNORECASE):
+        if re.match(target_project, project["name"][0:len(target_project)], flags=re.IGNORECASE):
             return project["id"]
 
     return None
@@ -61,7 +61,7 @@ def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, au
 
 def main():
     load_dotenv()
-    relevant_events = get_relevant_events("4906797.ics")
+    relevant_events = get_relevant_events("2019-2020.ics")
 
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)
