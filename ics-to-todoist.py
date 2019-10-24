@@ -66,12 +66,13 @@ def main():
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)
     api.sync()
+    state = api.state
 
     project_id = get_project_by_name(api, TARGET_PROJECT)
-    for event in relevant_events.events:
-        print(f"{event.name}: {event.begin}...", end="")
-        add_task(api, event.name, event.begin, project_id, auto_reminder=DEFAULT_REMINDER)
-        print("Done")
+    # for event in relevant_events.events:
+    #     print(f"{event.name}: {event.begin}...", end="")
+    #     result = add_task(api, event.name, event.begin, project_id, auto_reminder=DEFAULT_REMINDER)
+    #     print("Done")
 
 
 if __name__ == '__main__':
