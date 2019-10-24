@@ -10,12 +10,12 @@ from todoist.api import TodoistAPI
 
 # Regex pattern for relevant names
 # RELEVANT_NAMES = ["Restmüll", "Blaue Tonne", "Gelber Sack"]
-RELEVANT_NAMES = ["Betriebliche Steuerpraxis"]
-TARGET_PROJECT = "Education 🎓"
+RELEVANT_NAMES = ["Englisch A 2"]
+TARGET_PROJECT = "Shared"
 DEFAULT_REMINDER = True
 
 reminder_struct = namedtuple("reminder_struct", "hour, minute, dayoffset, houroffset, minuteoffset")
-REMINDER_TIMES = [reminder_struct(hour=0, minute=0, dayoffset=0, houroffset=0, minuteoffset=-15)]
+REMINDER_TIMES = [reminder_struct(hour=18, minute=0, dayoffset=0, houroffset=0, minuteoffset=0)]
 
 
 def get_relevant_events(filename: str):
@@ -37,7 +37,7 @@ def get_relevant_events(filename: str):
 
 def get_project_by_name(api: TodoistAPI, target_project: str):
     for project in api.projects.state["projects"]:
-        if re.fullmatch(target_project, project["name"], flags=re.IGNORECASE):
+        if re.match(target_project, project["name"][0:len(target_project)], flags=re.IGNORECASE):
             return project["id"]
 
     return None
@@ -53,6 +53,7 @@ def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, au
                             timedelta(days=td.dayoffset, hours=td.houroffset, minutes=td.minuteoffset)
         else:
             reminder_time = due + timedelta(days=td.dayoffset, hours=td.houroffset, minutes=td.minuteoffset)
+        reminder_time = reminder_time.astimezone(pytz.utc)
         api.reminders.add(item_id=item.temp_id, service="push", type="absolute", due_date_utc=reminder_time.isoformat())
 
     api.commit()
@@ -61,7 +62,7 @@ def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, au
 
 def main():
     load_dotenv()
-    relevant_events = get_relevant_events("4906797.ics")
+    relevant_events = get_relevant_events("5303160.ics")
 
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)
