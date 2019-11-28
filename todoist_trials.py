@@ -33,8 +33,9 @@ def main():
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)
     api.sync()
-    label = find_label('ios', api.state)
-    section = find_section('in progress', 2197434882, api.state)
+    # label = find_label('ios', api.state)
+    # section = find_section('in progress', 2197434882, api.state)
+    stats = api.completed.get_stats()
     pass
 
 if __name__ == "__main__":
