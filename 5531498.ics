@@ -1,0 +1,118 @@
+BEGIN:VCALENDAR
+PRODID:-//Events Calendar//iCal4j 1.0//EN
+CALSCALE:GREGORIAN
+VERSION:2.0
+METHOD:PUBLISH
+X-WR-CALNAME:Englisch A 2 
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200302T181500
+DTEND;TZID=Europe/Berlin:20200302T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-1
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200309T181500
+DTEND;TZID=Europe/Berlin:20200309T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-2
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200316T181500
+DTEND;TZID=Europe/Berlin:20200316T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-3
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200323T181500
+DTEND;TZID=Europe/Berlin:20200323T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-4
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200330T181500
+DTEND;TZID=Europe/Berlin:20200330T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-5
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200420T181500
+DTEND;TZID=Europe/Berlin:20200420T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-6
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200427T181500
+DTEND;TZID=Europe/Berlin:20200427T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-7
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200504T181500
+DTEND;TZID=Europe/Berlin:20200504T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-8
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200511T181500
+DTEND;TZID=Europe/Berlin:20200511T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-9
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200518T181500
+DTEND;TZID=Europe/Berlin:20200518T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-10
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20200228T063530Z
+DTSTART;TZID=Europe/Berlin:20200525T181500
+DTEND;TZID=Europe/Berlin:20200525T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5531498
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5531498-11
+END:VEVENT
+END:VCALENDAR
