@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 import os
 from todoist.api import TodoistAPI
 
+from shared import get_project_by_name
+
 # Regex pattern for relevant names
 RELEVANT_NAMES = ["Restmüll", "Blaue Tonne", "Gelber Sack", "Bioabfall"]
 TARGET_PROJECT = "GOA"
@@ -36,14 +38,6 @@ def get_relevant_events(filename: str):
                 relevant_events.events.add(event)
 
     return relevant_events
-
-
-def get_project_by_name(api: TodoistAPI, target_project: str):
-    for project in api.projects.state["projects"]:
-        if re.match(target_project, project["name"][0:len(target_project)], flags=re.IGNORECASE):
-            return project["id"]
-
-    return None
 
 
 def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, auto_reminder: bool):
