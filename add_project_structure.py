@@ -4,7 +4,7 @@ from todoist.api import TodoistAPI
 
 from shared import get_project_by_name
 
-TARGET_PROJECT = 'Production Analytics'
+TARGET_PROJECT = 'Work 🔋'
 SECTIONS = ['Bugfixes', 'In progress', 'Up next', 'Icebox']
 
 def main():
