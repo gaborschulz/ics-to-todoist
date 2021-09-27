@@ -1,42 +1,63 @@
 from dotenv import load_dotenv
 import os
 from todoist.api import TodoistAPI
+from collections import namedtuple
+from datetime import date
+import shared
 
-def labelize_string(string: str) -> str:
-    return string.lower().replace(' ', '_')
+Goal = namedtuple('Goal', ['pk', 'name', 'rationale', 'category_id', 'target_date', 'priority', 'task_id'])
 
-def find_label(label_to_find: str, state):
-    if 'labels' in state:
-        for label in state['labels']:
-            if label_to_find == label['name']:
-                return label
-    
-    return None
-
-def find_section(section_to_find: str, project_id: int, state):
-    if 'sections' in state:
-        for section in state['sections']:
-            if section_to_find == section['name']:
-                if project_id:
-                    if project_id == section['project_id']:
-                        return section
-                    else:
-                        continue
-                else:
-                    return section
-    
-    return None
-
+goals = [
+    Goal(
+        pk=1, 
+        name='Test Goal', 
+        rationale='Test rationale',
+        category_id='Development', 
+        target_date=date(2023, 12, 31), 
+        priority='tertiary', 
+        task_id=5190001137
+    )
+]
 
 def main():
     load_dotenv()
     todoist_apikey = os.getenv("TODOIST_API")
-    api = TodoistAPI(todoist_apikey)
+    api: TodoistAPI = TodoistAPI(todoist_apikey)
     api.sync()
-    # label = find_label('ios', api.state)
-    # section = find_section('in progress', 2197434882, api.state)
-    stats = api.completed.get_stats()
-    pass
+
+    for goal in goals:
+        project_name = f'Goals {goal.target_date.year} 🥇'
+        project = shared.get_or_create_project(api=api, project_name=project_name)
+        if not project:
+            continue
+
+        print(project['name'], project['id'])
+
+        section = shared.get_or_create_section(api=api, section_name=goal.category_id, project_id=project['id'])
+        if not section:
+            continue
+
+        print(section['name'], section['id'])
+
+        label = shared.get_or_create_label(api=api, label_name=goal.priority)
+        if not label:
+            continue
+        
+        print(label['name'], label['id'])
+
+        item = shared.add_or_update_task(
+            api=api,
+            content=f'{goal.name} ({goal.pk})',
+            description=goal.rationale,
+            project_id=project['id'],
+            target_date=goal.target_date,
+            section_id=section['id'],
+            labels=[label['id'],],
+            item_id=goal.task_id
+        )
+        print(item)
+
+        print(shared.check_task_completed(api, goal.task_id))
 
 if __name__ == "__main__":
     main()

@@ -53,7 +53,7 @@ def add_task(api: TodoistAPI, event, project_id: str):
 
 def main():
     load_dotenv()
-    relevant_events = get_relevant_events("icals/med.ics")
+    relevant_events = get_relevant_events("icals/event.ics")
 
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)
