@@ -1,0 +1,130 @@
+BEGIN:VCALENDAR
+PRODID:-//K4SYSTEMS//ABFALLPLUS//DE
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-TIMEZONE:Europe/Berlin
+X-MS-OLK-FORCEINSPECTOROPEN:FALSE
+X-WR-CALNAME:Abfuhrtermine Im Schwenksbrunnen, Westhausen
+X-WR-RELCALID:274895fd4fa237a59a5a2f2aab135e5e
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20190930T181500
+DTEND;TZID=Europe/Berlin:20190930T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-1
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191007T181500
+DTEND;TZID=Europe/Berlin:20191007T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-2
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191021T181500
+DTEND;TZID=Europe/Berlin:20191021T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-3
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191104T181500
+DTEND;TZID=Europe/Berlin:20191104T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-4
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191111T181500
+DTEND;TZID=Europe/Berlin:20191111T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-5
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191118T181500
+DTEND;TZID=Europe/Berlin:20191118T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-6
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191125T181500
+DTEND;TZID=Europe/Berlin:20191125T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-7
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191202T181500
+DTEND;TZID=Europe/Berlin:20191202T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-8
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191209T181500
+DTEND;TZID=Europe/Berlin:20191209T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-9
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20191216T181500
+DTEND;TZID=Europe/Berlin:20191216T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-10
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20200113T181500
+DTEND;TZID=Europe/Berlin:20200113T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-11
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190915T155312Z
+DTSTART;TZID=Europe/Berlin:20200120T181500
+DTEND;TZID=Europe/Berlin:20200120T194500
+SUMMARY:Englisch A 2 
+DESCRIPTION:Weitere Informationen zum Kurs finden Sie auf\nhttps://www.vhs-aalen.de/kurs/5303160
+LOCATION:Theodor-Heuss-Gymnasium\, Friedrichstraße 70\, 73430 Aalen
+TZID:Europe/Berlin
+UID:525-C-5303160-12
+END:VEVENT
+END:VCALENDAR

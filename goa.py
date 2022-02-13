@@ -4,7 +4,6 @@ import pytz
 from ics import Calendar
 from datetime import datetime, timedelta
 import re
-from dotenv import load_dotenv
 import os
 from todoist.api import TodoistAPI
 
@@ -64,8 +63,7 @@ def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, au
 
 
 def main():
-    load_dotenv()
-    relevant_events = get_relevant_events("imschwenksbrunnenwesthausen.ics")
+    relevant_events = get_relevant_events("icals/imschwenksbrunnenwesthausen.ics")
 
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)
