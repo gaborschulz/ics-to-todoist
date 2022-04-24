@@ -58,7 +58,7 @@ def add_task(api: TodoistAPI, task_name: str, due: datetime, project_id: int, au
         reminder_time = reminder_time.astimezone(TIMEZONE)
         api.reminders.add(item_id=item.temp_id, service="push", type="absolute", due_date_utc=reminder_time.astimezone(pytz.utc).isoformat())
 
-    api.commit()
+    # api.commit()
     return item
 
 
