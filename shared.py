@@ -7,7 +7,7 @@ from typing import List, Optional
 def get_random_color():
     MIN_COLOR = 30
     MAX_COLOR = 49
-    return random.randint(MIN_COLOR, MAX_COLOR)
+    return random.randint(MIN_COLOR, MAX_COLOR)  # nosec
 
 projects = {}
 def get_project_by_name(api, project_name: str):
