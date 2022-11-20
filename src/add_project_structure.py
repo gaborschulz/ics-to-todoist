@@ -1,13 +1,16 @@
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
 from todoist.api import TodoistAPI
 
-from shared import get_project_by_name
+from .shared import get_project_by_name
 
 TARGET_PROJECT = 'Work 🔋'
 SECTIONS = ['Bugfixes', 'In progress', 'Up next', 'Icebox']
 
+
 def main():
+    """ Main function """
     load_dotenv()
     todoist_apikey = os.getenv("TODOIST_API")
     api = TodoistAPI(todoist_apikey)

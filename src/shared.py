@@ -5,15 +5,17 @@ from typing import List, Optional, Dict, Any
 
 
 def get_random_color():
-    MIN_COLOR = 30
-    MAX_COLOR = 49
-    return random.randint(MIN_COLOR, MAX_COLOR)  # nosec
+    """ Get a random color code """
+    min_color = 30
+    max_color = 49
+    return random.randint(min_color, max_color)  # nosec
 
 
 projects: Dict[str, Any] = {}
 
 
 def get_project_by_name(api, project_name: str):
+    """ Get project by name """
     if project_name in projects:
         return projects[project_name]
 
@@ -26,14 +28,15 @@ def get_project_by_name(api, project_name: str):
 
 
 def get_or_create_project(api, project_name):
+    """ Get or create project """
     project = get_project_by_name(api=api, project_name=project_name)
-    PARENT_ID = 2197278352
-    COLOR_ID = get_random_color()
+    parent_id = 2197278352
+    color_id = get_random_color()
     if not project:
         project = api.projects.add(
             name=project_name,
-            color=COLOR_ID,
-            parent_id=PARENT_ID
+            color=color_id,
+            parent_id=parent_id
         )
         api.commit()
         projects[project_name] = project
@@ -45,6 +48,7 @@ sections: Dict[int, Any] = {}
 
 
 def get_section_by_name(api, section_name: str, project_id: int):
+    """ Get section by name """
     if project_id not in sections:
         sections[project_id] = {}
 
@@ -57,8 +61,6 @@ def get_section_by_name(api, section_name: str, project_id: int):
                 if project_id == section['project_id']:
                     sections[project_id][section_name] = section
                     return section
-                else:
-                    continue
             else:
                 return section
 
@@ -66,6 +68,7 @@ def get_section_by_name(api, section_name: str, project_id: int):
 
 
 def get_or_create_section(api, section_name: str, project_id: int):
+    """ Get or create section """
     section = get_section_by_name(api=api, section_name=section_name, project_id=project_id)
     if not section:
         section = api.sections.add(name=section_name, project_id=project_id)
@@ -81,6 +84,7 @@ labels: Dict[str, Any] = {}
 
 
 def get_label_by_name(api, label_name: str):
+    """ Get label by name """
     if label_name in labels:
         return labels[label_name]
 
@@ -93,6 +97,7 @@ def get_label_by_name(api, label_name: str):
 
 
 def get_or_create_label(api, label_name: str):
+    """ Get or create label """
     label = get_label_by_name(api=api, label_name=label_name)
     if not label:
         label = api.labels.add(name=label_name, color=get_random_color())
@@ -102,41 +107,45 @@ def get_or_create_label(api, label_name: str):
     return label
 
 
-def add_or_update_task(api, content: str, description: str, project_id: int, target_date: date, section_id: int, labels: List[int],
+# pylint: disable=too-many-arguments
+def add_or_update_task(api, content: str, description: str, project_id: int, target_date: date, section_id: int, label_ids: List[int],
                        item_id: Optional[int] = None):
+    """ Add or update task """
     if item_id:
         item = api.items.get_by_id(item_id)
         if item['checked'] == 1:
             return item
 
         if item:
-            update_task(content, description, project_id, target_date, section_id, labels, item)
+            update_task(content, description, project_id, target_date, section_id, label_ids, item)
         else:
-            item = create_task(api, content, description, project_id, target_date, section_id, labels)
+            item = create_task(api, content, description, project_id, target_date, section_id, label_ids)
     else:
-        item = create_task(api, content, description, project_id, target_date, section_id, labels)
+        item = create_task(api, content, description, project_id, target_date, section_id, label_ids)
     api.commit()
     return item
 
 
-def create_task(api, content, description, project_id, target_date, section_id, labels):
+def create_task(api, content, description, project_id, target_date, section_id, label_ids):
+    """ Create a new task """
     item = api.items.add(
         content=content,
         description=description,
         project_id=project_id,
         date_string=target_date.isoformat(),
         section_id=section_id,
-        labels=labels
+        labels=label_ids
     )
 
     return item
 
 
-def update_task(content, description, project_id, target_date, section_id, labels, item):
+def update_task(content, description, project_id, target_date, section_id, label_ids, item):
+    """ Update task """
     item.update(
         content=content,
         description=description,
-        labels=labels,
+        labels=label_ids,
         date_string=target_date.isoformat(),
     )
     if item['project_id'] != project_id:
@@ -146,6 +155,7 @@ def update_task(content, description, project_id, target_date, section_id, label
 
 
 def check_task_completed(api, item_id: int) -> bool:
+    """ Check if a task is completed """
     item = api.items.get_by_id(item_id)
     if item:
         return item['checked'] == 1
