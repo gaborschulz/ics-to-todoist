@@ -1,25 +1,28 @@
-from dotenv import load_dotenv
 import os
-from todoist.api import TodoistAPI
 from collections import namedtuple
 from datetime import date
+
+from dotenv import load_dotenv
+from todoist.api import TodoistAPI
+
 import shared
 
 Goal = namedtuple('Goal', ['pk', 'name', 'rationale', 'category_id', 'target_date', 'priority', 'task_id'])
 
 goals = [
     Goal(
-        pk=1, 
-        name='Test Goal', 
+        pk=1,
+        name='Test Goal',
         rationale='Test rationale',
-        category_id='Development', 
-        target_date=date(2023, 12, 31), 
-        priority='tertiary', 
+        category_id='Development',
+        target_date=date(2023, 12, 31),
+        priority='tertiary',
         task_id=5190001137
     )
 ]
 
-def main():
+
+def main() -> None:
     load_dotenv()
     todoist_apikey = os.getenv("TODOIST_API")
     api: TodoistAPI = TodoistAPI(todoist_apikey)
@@ -42,7 +45,7 @@ def main():
         label = shared.get_or_create_label(api=api, label_name=goal.priority)
         if not label:
             continue
-        
+
         print(label['name'], label['id'])
 
         item = shared.add_or_update_task(
@@ -52,12 +55,13 @@ def main():
             project_id=project['id'],
             target_date=goal.target_date,
             section_id=section['id'],
-            labels=[label['id'],],
+            labels=[label['id'], ],
             item_id=goal.task_id
         )
         print(item)
 
         print(shared.check_task_completed(api, goal.task_id))
+
 
 if __name__ == "__main__":
     main()
