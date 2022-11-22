@@ -7,6 +7,7 @@ import typer
 from dotenv import load_dotenv
 from ics import Calendar
 from rich.console import Console
+from rich.progress import Progress
 from todoist import TodoistAPI
 
 from ics_to_todoist.models import Event, Configuration
@@ -33,7 +34,7 @@ def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
 def load_config(config_file: str) -> Configuration:
     """ Load configuration from toml file """
     config_json = toml.load(config_file)
-    config = Configuration(**config_json)
+    config = Configuration(**config_json, )
     return config
 
 
@@ -65,15 +66,17 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
         console.print(f'Filtered events. {len(events)} event(s) remaining')
     with console.status('Syncing with Todoist...'):
         if config.todoist_api_key == '':
-            console.print(
-                '[bold red]ERROR: You need to provide a valid Todoist API key.[/bold red] Either set the TODOIST_API_KEY env variable or the todoist_api_key configuration parameter.')
+            console.print('[bold red]ERROR: You need to provide a valid Todoist API key.[/bold red] '
+                          'Either set the TODOIST_API_KEY env variable or the todoist_api_key configuration parameter.')
             sys.exit(1)
         api = TodoistAPI(config.todoist_api_key)  # types: ignore
         api.sync()
         project = get_project_by_name(api, config.target_project)
         console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
-    with console.status(f'Uploading {len(events)} to {project.name}...'):
-        upload_events(api, project, events, config)
+    with Progress() as progress:
+        upload_events(api, project, events, config, progress)
+
+    console.print('Done')
 
 
 if __name__ == "__main__":

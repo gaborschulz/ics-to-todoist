@@ -2,9 +2,14 @@ import os
 import re
 from zoneinfo import ZoneInfo
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from .reminder_time import ReminderTime
+
+
+def todoist_api_key_factory() -> str:
+    """ Default value factory for the todoist api key"""
+    return os.getenv('TODOIST_API_KEY', '')
 
 
 class Configuration(BaseModel):
@@ -14,7 +19,7 @@ class Configuration(BaseModel):
     default_reminder: bool = False
     timezone: str = 'UTC'
     reminder_times: list[ReminderTime]
-    todoist_api_key: str = os.getenv('TODOIST_API_KEY', '')
+    todoist_api_key: str = Field(default_factory=todoist_api_key_factory)
     only_future_events: bool = True
 
     @property
