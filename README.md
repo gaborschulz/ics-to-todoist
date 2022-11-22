@@ -1,6 +1,6 @@
 # ics-to-todoist
 
-[![python: 3.10](https://img.shields.io/badge/python-3.10-brightgreen)](https://python.org)
+[![python: 3.10](https://img.shields.io/badge/python-3.11-brightgreen)](https://python.org)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
@@ -8,11 +8,6 @@
 
 A tool to convert entries from an `.ics` file to tasks in Todoist
 
-## Project Details
+# Copyright
 
-Name: `ics-to-todoist`  
-Language: `Python`  
-Language Version: `3.10`  
-Technologies: `python`, `pydantic`, `typer`  
-Copyright: `Gabor Schulz`  
-License: `MIT`
+Copyright Gabor Schulz, 2022
