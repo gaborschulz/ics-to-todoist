@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -6,8 +7,10 @@ import typer
 from dotenv import load_dotenv
 from ics import Calendar
 from rich.console import Console
+from todoist import TodoistAPI
 
 from ics_to_todoist.models import Event, Configuration
+from ics_to_todoist.todoist_helper import get_project_by_name, upload_events
 
 
 def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
@@ -60,6 +63,17 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
     with console.status('Filtering events...'):
         events = filter_events(events=events, config=config)
         console.print(f'Filtered events. {len(events)} event(s) remaining')
+    with console.status('Syncing with Todoist...'):
+        if config.todoist_api_key == '':
+            console.print(
+                '[bold red]ERROR: You need to provide a valid Todoist API key.[/bold red] Either set the TODOIST_API_KEY env variable or the todoist_api_key configuration parameter.')
+            sys.exit(1)
+        api = TodoistAPI(config.todoist_api_key)  # types: ignore
+        api.sync()
+        project = get_project_by_name(api, config.target_project)
+        console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
+    with console.status(f'Uploading {len(events)} to {project.name}...'):
+        upload_events(api, project, events, config)
 
 
 if __name__ == "__main__":

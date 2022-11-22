@@ -1,5 +1,5 @@
 relevant_names = "Restmüll|Blaue Tonne|Gelber Sack|Bioabfall"
-target_project = "GOA"
+target_project = "Inbox"
 default_reminder = false
 timezone = "Europe/Berlin"
 only_future_events = true

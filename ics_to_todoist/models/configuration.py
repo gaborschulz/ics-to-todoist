@@ -14,7 +14,7 @@ class Configuration(BaseModel):
     default_reminder: bool = False
     timezone: str = 'UTC'
     reminder_times: list[ReminderTime]
-    todoist_api_key: str | None = os.getenv('TODOIST_API_KEY')
+    todoist_api_key: str = os.getenv('TODOIST_API_KEY', '')
     only_future_events: bool = True
 
     @property
