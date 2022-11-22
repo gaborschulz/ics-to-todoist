@@ -2,6 +2,7 @@ relevant_names = "Restmüll|Blaue Tonne|Gelber Sack|Bioabfall"
 target_project = "GOA"
 default_reminder = false
 timezone = "Europe/Berlin"
+only_future_events = true
 
 [[reminder_times]]
 day_offset = -1

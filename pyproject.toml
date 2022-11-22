@@ -12,6 +12,7 @@ typer = { extras = ["all"], version = "^0.7.0" }
 ics = "^0.7.2"
 pydantic = "^1.10.2"
 toml = "^0.10.2"
+python-dotenv = "^0.21.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,3 +24,26 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.bandit]
+exclude_dirs = ["archive", "tests"]
+
+[tool.pytest.ini_options]
+python_files = "tests.py test_*.py"
+addopts = "--pylint --mypy"
+
+[tool.mypy]
+exclude = [
+    'archive',
+    'tests'
+]
+ignore_missing_imports = "True"
+
+[tool.pylint.'MASTER']
+ignore = "archive,tests"
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 160
+disable = """
+    missing-module-docstring,
+    duplicate-code,
+    too-many-ancestors
+"""
