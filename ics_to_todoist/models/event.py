@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 
 class Event(BaseModel):
+    """ Event model """
     uid: str
     name: str
     description: str
@@ -11,4 +12,3 @@ class Event(BaseModel):
     end: datetime
     location: str
     precision: str
-

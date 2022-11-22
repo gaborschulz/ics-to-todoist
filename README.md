@@ -11,6 +11,6 @@ A tool to convert entries from an `.ics` file to tasks in Todoist
 Name: `ics-to-todoist`  
 Language: `Python`  
 Language Version: `3.10`  
-Technologies: `python`  
+Technologies: `python`, `pydantic`, `typer`  
 Copyright: `Gabor Schulz`  
 License: `MIT`

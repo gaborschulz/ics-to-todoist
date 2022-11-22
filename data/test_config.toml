@@ -1,0 +1,17 @@
+relevant_names = "Restmüll|Blaue Tonne|Gelber Sack|Bioabfall"
+target_project = "Inbox"
+default_reminder = false
+timezone = "Europe/Berlin"
+only_future_events = true
+
+[[reminder_times]]
+day_offset = -1
+hour_offset = 18
+
+[[reminder_times]]
+hour = 5
+minute = 45
+
+[[reminder_times]]
+hour = 6
+minute = 0
