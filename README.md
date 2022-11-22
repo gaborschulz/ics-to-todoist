@@ -1,6 +1,6 @@
 # ics-to-todoist
 
-[![python: 3.10](https://img.shields.io/badge/Python-3.10-brightgreen)](https://python.org)
+[![python: 3.10](https://img.shields.io/badge/python-3.10-brightgreen)](https://python.org)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
 ## Summary
