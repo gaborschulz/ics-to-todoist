@@ -7,7 +7,7 @@
 
 ## Summary
 
-A tool to convert entries from an `.ics` file to tasks in Todoist
+A tool to convert entries from an `.ics` file to tasks in Todoist.
 
 ## Copyright
 
