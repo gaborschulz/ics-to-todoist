@@ -1,8 +1,12 @@
 name: pytest
 
 on:
-  - push
-  - pull_request
+  pull_request: 
+    types:
+      - opened
+      - reopened
+    branches:
+      - main
 
 jobs:
   test:
