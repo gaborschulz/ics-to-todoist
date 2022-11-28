@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Gabor Schulz <gabor@gaborschulz.com>"]
 readme = "README.md"
+license = "MIT"
 packages = [{ include = "ics_to_todoist" }]
 
 [tool.poetry.dependencies]
