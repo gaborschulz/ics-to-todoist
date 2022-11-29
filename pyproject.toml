@@ -26,6 +26,8 @@ pytest-cov = "^4.0.0"
 coverage = "^6.5.0"
 pytest-pylint = "^0.19.0"
 pytest-mypy = "^0.10.1"
+mkdocs = "^1.4.2"
+mkdocs-material = "^8.5.10"
 
 [build-system]
 requires = ["poetry-core"]
