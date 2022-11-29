@@ -2,7 +2,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import toml
+import tomllib
 import typer
 from dotenv import load_dotenv
 from ics import Calendar
@@ -33,7 +33,8 @@ def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
 
 def load_config(config_file: str) -> Configuration:
     """ Load configuration from toml file """
-    config_json = toml.load(config_file)
+    with open(config_file, 'rb') as conf:
+        config_json = tomllib.load(conf)
     config = Configuration(**config_json, )
     return config
 
