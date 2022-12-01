@@ -1,8 +1,9 @@
+# pylint: disable=wrong-import-order
 import sys
+import tomllib
 from datetime import datetime
 from pathlib import Path
 
-import tomllib
 import typer
 from dotenv import load_dotenv
 from ics import Calendar
@@ -80,5 +81,10 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
     console.print('Done')
 
 
-if __name__ == "__main__":
+def shell():
+    """Wrapper for the ics-to-todoist shell command"""
     typer.run(main)
+
+
+if __name__ == "__main__":
+    shell()
