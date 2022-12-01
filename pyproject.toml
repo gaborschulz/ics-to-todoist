@@ -5,6 +5,24 @@ description = ""
 authors = ["Gabor Schulz <gabor@gaborschulz.com>"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://gaborschulz.github.io/ics-to-todoist/"
+repository = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}"
+documentation = "https://gaborschulz.github.io/ics-to-todoist/"
+keywords = ["ics", "todoist"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Utilities"
+]  # https://pypi.org/classifiers/
 packages = [{ include = "ics_to_todoist" }]
 
 [tool.poetry.scripts]
