@@ -1,3 +1,19 @@
 site_name: ics-to-todoist
 theme:
   name: material
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We don't use any cookies at all. We don't track you, we don't analyze your behavior. We just want to make sure
+      that the information we give you here is useful. That's all.
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/gaborschulz
+    - icon: fontawesome/brands/linkedin
+      link: https://gabor.link/edin
+  generator: false
+copyright: >
+  Copyright &copy; 2022 Gabor Schulz –
+  <a href="#__consent">Change cookie settings</a>
+repo_url: https://github.com/gaborschulz/ics-to-todoist
