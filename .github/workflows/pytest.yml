@@ -11,8 +11,7 @@ on:
     # Pattern matched against refs/tags
     tags:
       - v*           # Push events to every tag not containing /
-    branches:
-      - main
+
 
 jobs:
   test:
