@@ -23,14 +23,19 @@ def get_project_by_name(api: TodoistAPI, project_name: str):
     return None
 
 
-def upload_events(api: TodoistAPI, project: Project, events: list[Event], config: Configuration, progress: Progress) -> int:
+def upload_events(api: TodoistAPI, project: Project, events: list[Event], config: Configuration,
+                  progress: Progress) -> int:
     """ Upload events to Todoist"""
     counter = 0
     task = progress.add_task('Uploading to Todoist...', total=len(events))
     for event in events:
-        task_due = event.begin.isoformat()[0:10]
+        if config.default_reminder:
+            task_due = event.begin.isoformat()[0:16]
+        else:
+            task_due = event.begin.isoformat()[0:10]
         progress.console.print(f"\t{event.name} @ {task_due}")
-        item = api.items.add(content=event.name, project_id=project.id, date_string=task_due, auto_reminder=config.default_reminder)
+        item = api.items.add(content=event.name, project_id=project.id, date_string=task_due,
+                             auto_reminder=config.default_reminder)
 
         for reminder_time in config.reminder_times:
             if reminder_time.has_datetime_components:
@@ -38,7 +43,8 @@ def upload_events(api: TodoistAPI, project: Project, events: list[Event], config
             else:
                 reminder_time_value = event.begin + timedelta(**reminder_time.timedelta_components)
             reminder_time_value = reminder_time_value.astimezone(config.zoneinfo)
-            api.reminders.add(item_id=item.temp_id, service="push", type="absolute", due_date_utc=reminder_time_value.astimezone(ZoneInfo('UTC')).isoformat())
+            api.reminders.add(item_id=item.temp_id, service="push", type="absolute",
+                              due_date_utc=reminder_time_value.astimezone(ZoneInfo('UTC')).isoformat())
 
         api.commit()
         counter += 1
