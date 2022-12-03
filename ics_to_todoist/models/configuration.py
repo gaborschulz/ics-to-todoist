@@ -7,11 +7,6 @@ from pydantic import BaseModel, validator
 from .reminder_time import ReminderTime
 
 
-def todoist_api_key_factory() -> str:
-    """ Default value factory for the todoist api key"""
-    return os.getenv('TODOIST_API_KEY', '')
-
-
 class Configuration(BaseModel):
     """Configuration"""
     relevant_names: str | None
