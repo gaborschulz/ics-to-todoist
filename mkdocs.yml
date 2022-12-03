@@ -12,6 +12,8 @@ extra:
       link: https://github.com/gaborschulz
     - icon: fontawesome/brands/linkedin
       link: https://gabor.link/edin
+    - icon: fontawesome/brands/mastodon
+      link: https://fosstodon.org/@gaborschulz
   generator: false
 copyright: >
   Copyright &copy; 2022 Gabor Schulz –
