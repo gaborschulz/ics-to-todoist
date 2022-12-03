@@ -15,6 +15,8 @@ from todoist import TodoistAPI
 from ics_to_todoist.models import Event, Configuration
 from ics_to_todoist.todoist_helper import get_project_by_name, upload_events
 
+app = typer.Typer()
+
 
 def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
     """ Load ics file into a list of events"""
@@ -52,7 +54,8 @@ def filter_events(events: list[Event], config: Configuration) -> list[Event]:
     return filtered_events
 
 
-def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the config file (TOML)")):
+@app.command()
+def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the config file (TOML)"), dryrun: bool = typer.Option(False, "--dry-run")):
     """ Main function """
     console = Console()
     with console.status('Reading environment variables...', ):
@@ -71,21 +74,21 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
     with console.status('Filtering events...'):
         events = filter_events(events=events, config=config)
         console.print(f'Filtered events. {len(events)} event(s) remaining')
+        if len(events) == 0:
+            sys.exit(0)
     with console.status('Syncing with Todoist...'):
         api = TodoistAPI(config.todoist_api_key)  # types: ignore
         api.sync()
         project = get_project_by_name(api, config.target_project)
         console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
     with Progress() as progress:
-        upload_events(api, project, events, config, progress)
+        if not dryrun:
+            upload_events(api, project, events, config, progress)
+        else:
+            console.print('DRY RUN: no actual upload performed')
 
     console.print('Done')
 
 
-def shell():  # pragma: no cover
-    """Wrapper for the ics-to-todoist shell command"""
-    typer.run(main)
-
-
 if __name__ == "__main__":  # pragma: no cover
-    shell()
+    app()

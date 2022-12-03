@@ -26,7 +26,7 @@ classifiers = [
 packages = [{ include = "ics_to_todoist" }]
 
 [tool.poetry.scripts]
-ics-to-todoist = 'ics_to_todoist.__main__:shell'
+ics-to-todoist = 'ics_to_todoist.__main__:app'
 
 [tool.poetry.dependencies]
 python = ">=3.8"

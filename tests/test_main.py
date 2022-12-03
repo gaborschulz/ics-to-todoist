@@ -1,69 +1,163 @@
 # pylint: disable-all
 import tomllib
 from datetime import datetime
-from typing import Any, Tuple
-from zoneinfo import ZoneInfo
+from pathlib import Path
 
-import pytest
+from ics import Calendar
+from typer.testing import CliRunner
 
-from ics_to_todoist.__main__ import load_config, load_ics_data
+import ics_to_todoist
+from ics_to_todoist.__main__ import app
 from ics_to_todoist.models import Configuration, Event
 
 
-@pytest.fixture
-def configuration(monkeypatch) -> Tuple[dict[str, Any], Configuration]:
-    monkeypatch.setenv("TODOIST_API_KEY", "TEST_KEY")
-    config_file = 'data/test_config.toml'
-    with open(config_file, 'rb') as conf:
-        config_json = tomllib.load(conf)
-
-    config = load_config(config_file=config_file)
-
-    return config_json, config
+def test_main_function_no_params():
+    runner = CliRunner()
+    result = runner.invoke(app)
+    assert result.exit_code != 0
+    assert "Missing argument 'ICS_FILE'" in result.stdout
 
 
-@pytest.fixture
-def full_ics_dataset(configuration) -> list[Event]:
-    _, config = configuration
-    ics_file = 'data/test.ics'
-    events = load_ics_data(ics_file=ics_file, config=config)
-    return events
+def test_main_function_missing_config():
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics'])
+    assert result.exit_code != 0
+    assert "Missing option '--config-file'" in result.stdout
 
 
-def test_load_config(configuration):
-    config_json, config = configuration
-    assert config.relevant_names == config_json['relevant_names']
-    assert config.target_project == config_json['target_project']
-    assert config.default_reminder == config_json['default_reminder']
-    assert config.timezone == config_json['timezone']
-    assert config.only_future_events == config_json['only_future_events']
+def test_main_function_all_arguments_provided():
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 0
 
 
-def test_all_events_loaded(full_ics_dataset):
-    assert len(full_ics_dataset) == 3
+def test_main_function_load_dotenv(monkeypatch):
+    load_dotenv_invoked = False
+
+    def fake_load_dotenv():
+        monkeypatch.setenv('TODOIST_API_KEY', 'TEST_KEY')
+        nonlocal load_dotenv_invoked
+        load_dotenv_invoked = True
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'load_dotenv', fake_load_dotenv)
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 0
+    assert 'Loaded environment variables' in result.stdout
+    assert load_dotenv_invoked
 
 
-def test_all_events_names_match(full_ics_dataset):
-    event_names = [x.name for x in full_ics_dataset]
-    assert 'Relevant future event' in event_names
-    assert 'Irrelevant event' in event_names
-    assert 'Past event' in event_names
+def test_main_function_load_config(monkeypatch):
+    load_config_invoked = False
+
+    def fake_load_config(config_file: str) -> Configuration:
+        with open(config_file, 'rb') as conf:
+            config_json = tomllib.load(conf)
+        config = Configuration(**config_json, )
+
+        nonlocal load_config_invoked
+        load_config_invoked = True
+
+        return config
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'load_config', fake_load_config)
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 0
+    assert 'Loaded configuration from file' in result.stdout
+    assert load_config_invoked
 
 
-def test_event_begin_dates_past(full_ics_dataset):
-    events = [x for x in full_ics_dataset if x.begin <= datetime(2022, 12, 31, tzinfo=ZoneInfo('Europe/Berlin'))]
-    assert len(events) == 1
+def test_main_function_load_config_validationerror(monkeypatch):
+    load_config_invoked = False
+
+    def fake_load_dotenv():
+        monkeypatch.delenv('TODOIST_API_KEY')
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'load_dotenv', fake_load_dotenv)
+
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code != 0
+    assert 'TODOIST_API_KEY environment variable has to be set or the todoist_api_key field has to be provided' in result.stdout
 
 
-def test_event_begin_dates_future(full_ics_dataset):
-    events = [x for x in full_ics_dataset if x.begin > datetime(2022, 12, 31, tzinfo=ZoneInfo('Europe/Berlin'))]
-    assert len(events) == 2
+def test_main_function_load_ics_data(monkeypatch):
+    load_ics_data_invoked = False
+
+    def fake_load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
+        with Path(ics_file).open('r', encoding='utf-8') as fp:  # pylint: disable=invalid-name
+            file_content = fp.read()
+
+        events: list[Event] = []
+        calendar = Calendar(file_content)
+
+        for cal_event in calendar.events:
+            event = Event(uid=cal_event.uid, name=cal_event.name, description=cal_event.description,
+                          begin=cal_event.begin.datetime.astimezone(config.zoneinfo), end=cal_event.end.datetime.astimezone(config.zoneinfo),
+                          location=cal_event.location, precision=cal_event._begin_precision)  # pylint: disable=protected-access
+            events.append(event)
+
+        nonlocal load_ics_data_invoked
+        load_ics_data_invoked = True
+
+        return events
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'load_ics_data', fake_load_ics_data)
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 0
+    assert 'Loaded .ics file data/test.ics. Found 3 events' in result.stdout
+    assert load_ics_data_invoked
 
 
-def test_event_begin_dates_zoneinfo(full_ics_dataset, configuration):
-    _, config = configuration
-    assert full_ics_dataset.pop().begin.tzinfo == ZoneInfo(config.timezone)
+def test_main_function_filter_events_nonzero(monkeypatch):
+    filter_events_invoked = False
+
+    def fake_filter_events(events: list[Event], config: Configuration) -> list[Event]:
+        filtered_events = events
+        if config.only_future_events:
+            filtered_events = [event for event in filtered_events if event.begin >= datetime.now(tz=config.zoneinfo)]
+        if config.relevant_names:
+            filtered_events = [event for event in filtered_events if config.relevant_names_regex.findall(event.name)]
+
+        nonlocal filter_events_invoked
+        filter_events_invoked = True
+        return filtered_events
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'filter_events', fake_filter_events)
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 0
+    assert 'Filtered events. 1 event(s) remaining' in result.stdout
+    assert filter_events_invoked
+
+
+def test_main_function_filter_events_zero(monkeypatch):
+    def fake_filter_events(events: list[Event], config: Configuration) -> list[Event]:
+        return []
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'filter_events', fake_filter_events)
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 0
+    assert 'Filtered events. 0 event(s) remaining' in result.stdout
+    assert 'Found target project' not in result.stdout
+
+
+def test_main_function_todoist_api(config_json):
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert 'DRY RUN: no actual upload performed' in result.stdout
+    assert result.exit_code == 0
+
+
+def test_main_function_todoist_api_non_dryrun(config_json):
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml'])
+    assert f'Found target project {config_json["target_project"]}:' in result.stdout
+    assert result.exit_code == 0
 
 # Test what happens when todoist project is not found
 # Test if ics does not return any relevant values
-# Test what happens if there is not time provided for an event and default_reminder is set to true
+# Test what happens if there is no time provided for an event and default_reminder is set to true
