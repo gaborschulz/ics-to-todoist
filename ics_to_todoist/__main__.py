@@ -7,6 +7,7 @@ from pathlib import Path
 import typer
 from dotenv import load_dotenv
 from ics import Calendar
+from pydantic import ValidationError
 from rich.console import Console
 from rich.progress import Progress
 from todoist import TodoistAPI
@@ -58,7 +59,11 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
         load_dotenv()
         console.print('Loaded environment variables')
     with console.status(f'Reading configuration from file [bold yellow]{config_file}[/bold yellow]...'):
-        config = load_config(config_file=config_file)
+        try:
+            config = load_config(config_file=config_file)
+        except ValidationError as ex:
+            print(ex)
+            sys.exit(1)
         console.print(f'Loaded configuration from file [bold yellow]{config_file}[/bold yellow]')
     with console.status(f'Reading .ics file [bold yellow]{ics_file}[/bold yellow]...'):
         events = load_ics_data(ics_file=ics_file, config=config)
@@ -67,10 +72,6 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
         events = filter_events(events=events, config=config)
         console.print(f'Filtered events. {len(events)} event(s) remaining')
     with console.status('Syncing with Todoist...'):
-        if config.todoist_api_key == '':
-            console.print('[bold red]ERROR: You need to provide a valid Todoist API key.[/bold red] '
-                          'Either set the TODOIST_API_KEY env variable or the todoist_api_key configuration parameter.')
-            sys.exit(1)
         api = TodoistAPI(config.todoist_api_key)  # types: ignore
         api.sync()
         project = get_project_by_name(api, config.target_project)
@@ -81,10 +82,10 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
     console.print('Done')
 
 
-def shell():
+def shell():  # pragma: no cover
     """Wrapper for the ics-to-todoist shell command"""
     typer.run(main)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     shell()

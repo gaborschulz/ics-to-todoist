@@ -33,5 +33,5 @@ class Configuration(BaseModel):
         if not value:
             value = os.getenv('TODOIST_API_KEY', '')
         if not value:
-            raise ValueError('TODOIST_API_KEY environment variable has to be set or the todoist_api_key field has to be provided')
+            raise ValueError('TODOIST_API_KEY environment variable has to be set or the todoist_api_key field has to be provided in the configuration file')
         return value
