@@ -79,8 +79,12 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
     with console.status('Syncing with Todoist...'):
         api = TodoistAPI(config.todoist_api_key)  # types: ignore
         api.sync()
-        project = get_project_by_name(api, config.target_project)
-        console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
+        try:
+            project = get_project_by_name(api, config.target_project)
+            console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
+        except ValueError as ex:
+            print(ex)
+            sys.exit(1)
     with Progress() as progress:
         if not dryrun:
             upload_events(api, project, events, config, progress)

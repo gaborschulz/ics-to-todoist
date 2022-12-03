@@ -152,6 +152,22 @@ def test_main_function_todoist_api(config_json):
     assert result.exit_code == 0
 
 
+def test_main_function_invalid_project_name(monkeypatch):
+    def fake_load_config(config_file: str) -> Configuration:
+        with open(config_file, 'rb') as conf:
+            config_json = tomllib.load(conf)
+        config = Configuration(**config_json, )
+
+        config.target_project = 'INVALID_PROJECT_NAME'
+        return config
+
+    monkeypatch.setattr(ics_to_todoist.__main__, 'load_config', fake_load_config)
+    runner = CliRunner()
+    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
+    assert result.exit_code == 1
+    assert 'INVALID_PROJECT_NAME was not found' in result.stdout
+
+
 def test_main_function_todoist_api_non_dryrun(config_json):
     runner = CliRunner()
     result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml'])
