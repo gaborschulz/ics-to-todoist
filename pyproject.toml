@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "ics-to-todoist"
-version = "0.1.2"
+version = "0.1.3"
 description = "A command line tool to convert entries from an `.ics` file to tasks in Todoist."
 authors = ["Gabor Schulz <gabor@gaborschulz.com>"]
 readme = "README.md"
 license = "MIT"
 homepage = "https://gaborschulz.github.io/ics-to-todoist/"
-repository = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}"
+repository = "https://github.com/gaborschulz/ics-to-todoist"
 documentation = "https://gaborschulz.github.io/ics-to-todoist/"
 keywords = ["ics", "todoist"]
 classifiers = [

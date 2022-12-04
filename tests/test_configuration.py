@@ -32,8 +32,9 @@ def test_default_timezone(configuration_no_timezone):
     assert configuration_no_timezone.timezone == 'UTC'
 
 
-def test_missing_todoist_api_key_raises_validation_error(config_json):
+def test_missing_todoist_api_key_raises_validation_error(monkeypatch, config_json):
     if 'todoist_api_key' in config_json:
         config_json.pop('todoist_api_key')
+    monkeypatch.delenv('TODOIST_API_KEY')
     with pytest.raises(Exception):
         config = Configuration(**config_json, )

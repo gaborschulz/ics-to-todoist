@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 start=$(date +%s)
+VERSION_BUMPED=0
 
 load_env() {
     if [ -f .env ]; then
@@ -23,6 +24,7 @@ bump_version() {
     echo "Argument: $1 / $#"
     if [[ "$#" -eq 0 ]]; then
         echo "No version bump"
+        VERSION_BUMPED=0
         return 0
     fi
 
@@ -31,6 +33,7 @@ bump_version() {
         poetry version &&
         git commit -am "Committing version $(poetry version --short)" &&
         git tag -a v$(poetry version --short) -m "Tagging version $(poetry version --short)"
+    VERSION_BUMPED=1
 }
 
 push() {
@@ -38,11 +41,19 @@ push() {
     git push origin v$(poetry version --short)
 }
 
+release_to_pypi() {
+    if VERSION_BUMPED == 0; then
+        echo "No PyPI release without version bump"
+    fi
+
+    poetry publish --build --repository test-pypi
+}
+
 load_env &&
-    cleanup &&
-    run_test &&
-    bump_version $1 &&
-    push
+cleanup &&
+run_test &&
+bump_version $1 &&
+push
 
 end=$(date +%s)
 runtime=$((end - start))
