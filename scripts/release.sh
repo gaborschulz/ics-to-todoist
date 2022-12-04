@@ -46,7 +46,7 @@ release_to_pypi() {
         echo "No PyPI release without version bump"
     fi
 
-    poetry publish --build
+    poetry publish --build --no-interaction
 }
 
 load_env &&
