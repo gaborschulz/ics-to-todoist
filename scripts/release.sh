@@ -37,12 +37,12 @@ bump_version() {
 }
 
 push() {
-    coverage-badge -o coverage.svg --force
+    coverage-badge -o coverage.svg -f
     git push origin v$(poetry version --short)
 }
 
 release_to_pypi() {
-    if VERSION_BUMPED == 0; then
+    if $VERSION_BUMPED == 0; then
         echo "No PyPI release without version bump"
     fi
 
