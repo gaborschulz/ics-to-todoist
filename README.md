@@ -6,7 +6,7 @@
 [![mypy: checked](https://img.shields.io/badge/mypy-checked-blue)](http://mypy-lang.org)
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
 [![Tests](https://github.com/gaborschulz/ics-to-todoist/actions/workflows/pytest.yml/badge.svg)](https://github.com/gaborschulz/ics-to-todoist/actions/workflows/pytest.yml)
-[![Coverage](https://github.com/gaborschulz/ics-to-todoist/blob/main/coverage.svg)](https://github.com/gaborschulz/ics-to-todoist)
+[![Coverage](https://raw.githubusercontent.com/gaborschulz/ics-to-todoist/main/coverage.svg)](https://github.com/gaborschulz/ics-to-todoist)
 
 ## Summary
 
