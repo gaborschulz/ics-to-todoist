@@ -1,4 +1,5 @@
 # pylint: disable-all
+import os
 import re
 from zoneinfo import ZoneInfo
 
@@ -35,6 +36,7 @@ def test_default_timezone(configuration_no_timezone):
 def test_missing_todoist_api_key_raises_validation_error(monkeypatch, config_json):
     if 'todoist_api_key' in config_json:
         config_json.pop('todoist_api_key')
-    monkeypatch.delenv('TODOIST_API_KEY')
+    if os.getenv('TODOIST_API_KEY', ''):
+        monkeypatch.delenv('TODOIST_API_KEY')
     with pytest.raises(Exception):
         config = Configuration(**config_json, )
