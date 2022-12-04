@@ -1,7 +1,7 @@
 # ics-to-todoist
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ics-to-todoist?color=red)
-![PyPI - License](https://img.shields.io/pypi/l/ics-to-todoist)
+![PyPI - License](https://img.shields.io/pypi/l/ics-to-todoist?color=blue)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![mypy: checked](https://img.shields.io/badge/mypy-checked-blue)](http://mypy-lang.org)
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
