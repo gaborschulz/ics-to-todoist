@@ -65,9 +65,10 @@ def version_callback(value: bool):
 
 @app.command()
 def main(ics_file: str,
-         config_file: str = typer.Option(..., help="Path of the config file (TOML)"),
-         dryrun: bool = typer.Option(False, "--dry-run"),
-         version: Optional[bool] = typer.Option(None, "--version", callback=version_callback, is_eager=True)):  # pylint: disable=unused-argument
+         config_file: str = typer.Option(..., help='Path of the config file (TOML)'),
+         dryrun: bool = typer.Option(False, '--dry-run', help='Execute all actions, except uploading to Todoist'),
+         version: Optional[bool] = typer.Option(None, "--version", callback=version_callback, is_eager=True,  # pylint: disable=unused-argument
+                                                help='Show the tool\'s version')):
     """ Main function """
     console = Console()
     with console.status(f'Reading configuration from file [bold yellow]{config_file}[/bold yellow]...'):
