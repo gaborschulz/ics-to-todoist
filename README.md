@@ -7,7 +7,7 @@
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
 [![Tests](https://github.com/gaborschulz/ics-to-todoist/actions/workflows/pytest.yml/badge.svg)](https://github.com/gaborschulz/ics-to-todoist/actions/workflows/pytest.yml)
 [![Coverage](https://raw.githubusercontent.com/gaborschulz/ics-to-todoist/main/coverage.svg)](https://github.com/gaborschulz/ics-to-todoist)
-![PyPI](https://img.shields.io/pypi/v/ics-to-todoist)
+[![PyPI](https://img.shields.io/pypi/v/ics-to-todoist)](https://pypi.org/project/ics-to-todoist/)
 
 ## Summary
 
