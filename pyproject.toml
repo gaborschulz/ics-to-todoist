@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "ics-to-todoist"
-version = "0.1.5"
+version = "0.1.6"
 description = "A command line tool to convert entries from an .ics file to tasks in Todoist."
 authors = ["Gabor Schulz"]
 readme = "README.md"
 license = "MIT"
 homepage = "https://gaborschulz.github.io/ics-to-todoist/"
 repository = "https://github.com/gaborschulz/ics-to-todoist"
-documentation = "https://gaborschulz.github.io/ics-to-todoist/"
+# documentation = "https://gaborschulz.github.io/ics-to-todoist/"
 keywords = ["ics", "todoist"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -47,6 +47,7 @@ coverage = "^6.5.0"
 pytest-pylint = "^0.19.0"
 pytest-mypy = "^0.10.1"
 coverage-badge = "^1.1.0"
+types-setuptools = "^65.6.0.1"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.4.2"

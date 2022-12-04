@@ -1,9 +1,10 @@
 # pylint: disable=wrong-import-order
-import sys
 import tomllib
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
+import pkg_resources
 import typer
 from ics import Calendar
 from pydantic import ValidationError
@@ -15,6 +16,8 @@ from ics_to_todoist.models import Event, Configuration
 from ics_to_todoist.todoist_helper import get_project_by_name, upload_events
 
 app = typer.Typer()
+
+__version__ = pkg_resources.get_distribution("ics-to-todoist").version
 
 
 def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
@@ -53,8 +56,18 @@ def filter_events(events: list[Event], config: Configuration) -> list[Event]:
     return filtered_events
 
 
+def version_callback(value: bool):
+    """Callback to show the tool's version"""
+    if value:
+        print(f'ics-to-todoist version: {__version__}')
+        raise typer.Exit()
+
+
 @app.command()
-def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the config file (TOML)"), dryrun: bool = typer.Option(False, "--dry-run")):
+def main(ics_file: str,
+         config_file: str = typer.Option(..., help="Path of the config file (TOML)"),
+         dryrun: bool = typer.Option(False, "--dry-run"),
+         version: Optional[bool] = typer.Option(None, "--version", callback=version_callback, is_eager=True)):  # pylint: disable=unused-argument
     """ Main function """
     console = Console()
     with console.status(f'Reading configuration from file [bold yellow]{config_file}[/bold yellow]...'):
@@ -62,7 +75,7 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
             config = load_config(config_file=config_file)
         except ValidationError as ex:
             print(ex)
-            sys.exit(1)
+            raise typer.Exit(1)
         console.print(f'Loaded configuration from file [bold yellow]{config_file}[/bold yellow]')
     with console.status(f'Reading .ics file [bold yellow]{ics_file}[/bold yellow]...'):
         events = load_ics_data(ics_file=ics_file, config=config)
@@ -71,7 +84,7 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
         events = filter_events(events=events, config=config)
         console.print(f'Filtered events. {len(events)} event(s) remaining')
         if len(events) == 0:
-            sys.exit(0)
+            raise typer.Exit(0)
     with console.status('Syncing with Todoist...'):
         api = TodoistAPI(config.todoist_api_key)  # types: ignore
         api.sync()
@@ -80,7 +93,7 @@ def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the c
             console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
         except ValueError as ex:
             print(ex)
-            sys.exit(1)
+            raise typer.Exit(1)
     with Progress() as progress:
         if not dryrun:
             upload_events(api, project, events, config, progress)
