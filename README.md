@@ -13,6 +13,12 @@
 
 A command line tool to convert entries from an `.ics` file to tasks in Todoist.
 
+## Getting Started
+
+Getting started is quite simple:  
+
+`pipx install ics-to-todoist`
+
 ## Documentation
 
 The documentation is available here: https://ics-to-todoist.gaborschulz.com.
