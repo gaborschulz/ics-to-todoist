@@ -9,6 +9,7 @@ from ics import Calendar
 from typer.testing import CliRunner
 
 import ics_to_todoist
+from ics_to_todoist import __main__
 from ics_to_todoist.__main__ import app
 from ics_to_todoist.models import Configuration, Event
 
@@ -19,6 +20,13 @@ def test_main_function_no_params():
     runner = CliRunner()
     result = runner.invoke(app)
     assert result.exit_code != 0
+
+
+def test_main_function_version():
+    runner = CliRunner()
+    result = runner.invoke(app, ['--version'])
+    assert __main__.__version__ in result.stdout
+    assert result.exit_code == 0
 
 
 def test_main_function_missing_config():
