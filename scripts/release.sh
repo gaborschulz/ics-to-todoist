@@ -37,7 +37,7 @@ bump_version() {
 }
 
 push() {
-    coverage-badge -o coverage.svg
+    coverage-badge -o coverage.svg --force
     git push origin v$(poetry version --short)
 }
 
@@ -53,7 +53,8 @@ load_env &&
 cleanup &&
 run_test &&
 bump_version $1 &&
-push
+push &&
+release_to_pypi
 
 end=$(date +%s)
 runtime=$((end - start))
