@@ -42,7 +42,7 @@ push() {
 }
 
 release_to_pypi() {
-    if $VERSION_BUMPED == 0; then
+    if [[ $VERSION_BUMPED == 0 ]]; then
         echo "No PyPI release without version bump"
     fi
 
