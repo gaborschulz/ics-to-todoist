@@ -9,7 +9,11 @@
 
 ## Summary
 
-A tool to convert entries from an `.ics` file to tasks in Todoist.
+A command line tool to convert entries from an `.ics` file to tasks in Todoist.
+
+## Legal info
+
+This app is not created by, affiliated with, or supported by Doist.
 
 ## Copyright
 
