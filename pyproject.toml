@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ics-to-todoist"
-version = "0.1.4"
+version = "0.1.5"
 description = "A command line tool to convert entries from an `.ics` file to tasks in Todoist."
 authors = ["Gabor Schulz"]
 readme = "README.md"
@@ -31,7 +31,7 @@ ics-to-todoist = 'ics_to_todoist.__main__:app'
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"
 typer = { extras = ["all"], version = "^0.7.0" }
-ics = "^0.7.2"
+ics = ">=0.7.2"
 pydantic = "^1.10.2"
 python-dotenv = "^0.21.0"
 todoist-python = "^8.1.3"
