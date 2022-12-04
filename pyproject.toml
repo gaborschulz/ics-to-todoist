@@ -29,7 +29,7 @@ packages = [{ include = "ics_to_todoist" }]
 ics-to-todoist = 'ics_to_todoist.__main__:app'
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0.0"
+python = ">=3.9,<4.0.0"
 typer = { extras = ["all"], version = "^0.7.0" }
 ics = "^0.7.2"
 pydantic = "^1.10.2"
