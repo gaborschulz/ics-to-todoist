@@ -5,7 +5,6 @@ from datetime import datetime
 from pathlib import Path
 
 import typer
-from dotenv import load_dotenv
 from ics import Calendar
 from pydantic import ValidationError
 from rich.console import Console
@@ -58,9 +57,6 @@ def filter_events(events: list[Event], config: Configuration) -> list[Event]:
 def main(ics_file: str, config_file: str = typer.Option(..., help="Path of the config file (TOML)"), dryrun: bool = typer.Option(False, "--dry-run")):
     """ Main function """
     console = Console()
-    with console.status('Reading environment variables...', ):
-        load_dotenv()
-        console.print('Loaded environment variables')
     with console.status(f'Reading configuration from file [bold yellow]{config_file}[/bold yellow]...'):
         try:
             config = load_config(config_file=config_file)

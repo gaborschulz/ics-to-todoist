@@ -17,7 +17,7 @@ patched_projects: dict[str, Any] = {}
 
 @pytest.fixture
 def todoist_api(monkeypatch) -> TodoistAPI:
-    load_dotenv()
+    load_dotenv('.env.test')
     monkeypatch.setattr(ics_to_todoist.todoist_helper, 'projects', patched_projects)
     api = TodoistAPI(os.getenv('TODOIST_API_KEY'))
     monkeypatch.setattr(api, 'commit', lambda: None)

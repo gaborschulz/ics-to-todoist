@@ -22,10 +22,12 @@ pipx install ics-to-todoist
 
 **Step 1**
 
-- You'll need to provide an API key to the tool to interact with Todoist. To do so, visit the
-  [todoist Developer Console](https://developer.todoist.com/appconsole.html) and choose `Create a new app`.
-- Give your app a catch name. You can `App service URL` empty.
-- Click `Create test token` to generate an access token.
+- You'll need to provide an API key to the tool to interact with Todoist.
+  To do so, visit the <a href="https://todoist.com/app/today" target="_blank">Todoist Website</a>
+- Click on your initials in the upper right hand corner.
+- Click on `Integrations`.
+- In the pop-up, scroll down to the bottom to the sectin `API token`.
+- Click on `Copy to clipboard` to copy your token
 
 **Step 2**
 

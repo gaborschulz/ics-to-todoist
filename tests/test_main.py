@@ -1,14 +1,18 @@
 # pylint: disable-all
+import os
 import tomllib
 from datetime import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv
 from ics import Calendar
 from typer.testing import CliRunner
 
 import ics_to_todoist
 from ics_to_todoist.__main__ import app
 from ics_to_todoist.models import Configuration, Event
+
+load_dotenv('.env.test')
 
 
 def test_main_function_no_params():
@@ -27,22 +31,6 @@ def test_main_function_all_arguments_provided():
     runner = CliRunner()
     result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
     assert result.exit_code == 0
-
-
-def test_main_function_load_dotenv(monkeypatch):
-    load_dotenv_invoked = False
-
-    def fake_load_dotenv():
-        monkeypatch.setenv('TODOIST_API_KEY', 'TEST_KEY')
-        nonlocal load_dotenv_invoked
-        load_dotenv_invoked = True
-
-    monkeypatch.setattr(ics_to_todoist.__main__, 'load_dotenv', fake_load_dotenv)
-    runner = CliRunner()
-    result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
-    assert result.exit_code == 0
-    assert 'Loaded environment variables' in result.stdout
-    assert load_dotenv_invoked
 
 
 def test_main_function_load_config(monkeypatch):
@@ -67,12 +55,7 @@ def test_main_function_load_config(monkeypatch):
 
 
 def test_main_function_load_config_validationerror(monkeypatch):
-    load_config_invoked = False
-
-    def fake_load_dotenv():
-        monkeypatch.delenv('TODOIST_API_KEY')
-
-    monkeypatch.setattr(ics_to_todoist.__main__, 'load_dotenv', fake_load_dotenv)
+    monkeypatch.delenv('TODOIST_API_KEY')
 
     runner = CliRunner()
     result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
@@ -167,11 +150,8 @@ def test_main_function_invalid_project_name(monkeypatch):
 
 
 def test_main_function_todoist_api_non_dryrun(config_json):
+    todoist_api_key = os.getenv('TODOIST_API_KEY')
     runner = CliRunner()
     result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml'])
     assert f'Found target project {config_json["target_project"]}:' in result.stdout
     assert result.exit_code == 0
-
-# Test what happens when todoist project is not found
-# Test if ics does not return any relevant values
-# Test what happens if there is no time provided for an event and default_reminder is set to true
