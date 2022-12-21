@@ -15,7 +15,7 @@ A command line tool to convert entries from an `.ics` file to tasks in Todoist.
 
 ## Getting Started
 
-Getting started is quite simple:  
+Getting started is quite simple:
 
 `pipx install ics-to-todoist`
 
@@ -23,9 +23,13 @@ Getting started is quite simple:
 
 The documentation is available here: https://ics-to-todoist.gaborschulz.com.
 
-## Legal info
+## Disclaimer
 
 This app is not created by, affiliated with, or supported by Doist.
+
+## License
+
+For licensing details, please, see [LICENSE.md](LICENSE.md)
 
 ## Copyright
 
