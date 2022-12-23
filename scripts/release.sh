@@ -47,6 +47,7 @@ release_to_pypi() {
     fi
 
     poetry publish --build
+    gh release create v$(poetry version --short) --generate-notes
 }
 
 load_env &&
