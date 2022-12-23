@@ -5,7 +5,7 @@ collect a list of events as to-dos in Todoist.
 
 ## Requirements
 
-The tool needs Python >= 3.8 to run. It has been tested with Python 3.8, 3.9, 3.10 and 3.11.
+The tool needs Python >= 3.10 to run. It has been tested with Python 3.10 and 3.11.
 
 ## Installation
 
