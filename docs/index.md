@@ -51,4 +51,14 @@ Run the tool like this:
 ics-to-todoist <ICS_FILE> --config-path <CONFIG_FILE>
 ```
 
-Replace `<ICS_FILE>` with the path of your `.ics` file and `<CONFIG_FILE>` with the path of your configuration file. 
+Replace `<ICS_FILE>` with the path of your `.ics` file and `<CONFIG_FILE>` with the path of your configuration file.
+
+## Privacy Policy
+
+This site does not collect any personal data about you. It does not use cookies, tracking or anything similar. The sole purpose of this site is to provide a
+documentation for the `ics-to-todoist` package. For more details, please, visit the
+<a href="https://www.iubenda.com/privacy-policy/8008630" target="_blank">Privacy Policy</a> page.
+
+## Imprint
+
+The imprint required by the German Telemediengesetz is available here: <a href="https://gaborschulz.com/imprint/index.html" target="_blank">Imprint</a>
