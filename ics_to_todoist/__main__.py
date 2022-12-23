@@ -10,10 +10,11 @@ from ics import Calendar
 from pydantic import ValidationError
 from rich.console import Console
 from rich.progress import Progress
-from todoist import TodoistAPI
+from synctodoist import TodoistAPI
+from synctodoist.exceptions import TodoistError
 
 from ics_to_todoist.models import Event, Configuration
-from ics_to_todoist.todoist_helper import get_project_by_name, upload_events
+from ics_to_todoist.todoist_helper import upload_events
 
 app = typer.Typer()
 
@@ -87,17 +88,24 @@ def main(ics_file: str,
         if len(events) == 0:
             raise typer.Exit(0)
     with console.status('Syncing with Todoist...'):
-        api = TodoistAPI(config.todoist_api_key)  # types: ignore
+        api = TodoistAPI(api_key=config.todoist_api_key)  # types: ignore
         api.sync()
         try:
-            project = get_project_by_name(api, config.target_project)
+            project = api.projects.find(pattern=config.target_project)
             console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
-        except ValueError as ex:
-            print(ex)
+        except TodoistError:
+            console.print(f'[bold red]ERROR[/bold red]: Project {config.target_project} was not found')
+            raise typer.Exit(1)  # pylint: disable=raise-missing-from
+        except Exception as ex:
+            console.print(f'ERROR: {ex}')
             raise typer.Exit(1)
     with Progress() as progress:
         if not dryrun:
-            upload_events(api, project, events, config, progress)
+            try:
+                upload_events(api, project, events, config, progress)
+            except Exception as ex:
+                print(f'[bold red]ERROR[/bold red]: {ex}')
+                raise typer.Exit(1)
         else:
             console.print('DRY RUN: no actual upload performed')
 

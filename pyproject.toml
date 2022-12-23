@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ics-to-todoist"
-version = "0.1.6"
+version = "0.2.0"
 description = "A command line tool to convert entries from an .ics file to tasks in Todoist."
 authors = ["Gabor Schulz"]
 readme = "README.md"
@@ -18,7 +18,6 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Topic :: Utilities"
@@ -29,12 +28,12 @@ packages = [{ include = "ics_to_todoist" }]
 ics-to-todoist = 'ics_to_todoist.__main__:app'
 
 [tool.poetry.dependencies]
-python = ">=3.9,<4.0.0"
+python = ">=3.10,<4.0.0"
 typer = { extras = ["all"], version = "^0.7.0" }
 ics = "^0.7.2"
 pydantic = "^1.10.2"
 python-dotenv = "^0.21.0"
-todoist-python = "^8.1.3"
+synctodoist = ">=0.1.8"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -85,5 +84,6 @@ max-line-length = 160
 disable = """
     missing-module-docstring,
     duplicate-code,
-    too-many-ancestors
+    too-many-ancestors,
+    broad-except
 """
