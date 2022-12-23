@@ -33,7 +33,7 @@ typer = { extras = ["all"], version = "^0.7.0" }
 ics = "^0.7.2"
 pydantic = "^1.10.2"
 python-dotenv = "^0.21.0"
-synctodoist = ">=0.1.8"
+synctodoist = "^0.1.8"
 
 
 [tool.poetry.group.dev.dependencies]
