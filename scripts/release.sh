@@ -13,7 +13,7 @@ load_env() {
 }
 
 run_test() {
-    pytest && \
+    pytest -s && \
     coverage-badge -o coverage.svg -f
 }
 
