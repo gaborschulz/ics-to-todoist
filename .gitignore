@@ -225,3 +225,5 @@ fabric.properties
 
 .DS_Store
 .env.test
+
+private/
