@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ics-to-todoist"
-version = "0.4.0"
+version = "0.4.1"
 description = "A command line tool to convert entries from an .ics file to tasks in Todoist."
 authors = ["Gabor Schulz"]
 readme = "README.md"
