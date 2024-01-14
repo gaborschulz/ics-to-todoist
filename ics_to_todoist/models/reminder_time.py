@@ -3,17 +3,17 @@ from pydantic import BaseModel, Field
 
 class ReminderTime(BaseModel):
     """ Reminder time"""
-    hour: int | None
-    minute: int | None
-    second: int | None
-    day_offset: int | None = Field(alias='days')
-    hour_offset: int | None = Field(alias='hours')
-    minute_offset: int | None = Field(alias='minutes')
-    second_offset: int | None = Field(alias='seconds')
+    hour: int | None = None
+    minute: int | None = None
+    second: int | None = None
+    day_offset: int | None = Field(alias='days', default=None)
+    hour_offset: int | None = Field(alias='hours', default=None)
+    minute_offset: int | None = Field(alias='minutes', default=None)
+    second_offset: int | None = Field(alias='seconds', default=None)
 
     class Config:
         # pylint: disable=missing-class-docstring,too-few-public-methods
-        allow_population_by_field_name = True
+        populate_by_name = True
 
     @property
     def datetime_components(self) -> dict[str, int]:
