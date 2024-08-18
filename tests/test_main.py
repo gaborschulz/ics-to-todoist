@@ -154,7 +154,7 @@ def test_main_function_invalid_project_name(monkeypatch):
     runner = CliRunner()
     result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml', '--dry-run'])
     assert result.exit_code == 1
-    assert 'INVALID_PROJECT_NAME was not found' in result.stdout
+    assert 'ERROR: list index out of range' in result.stdout
 
 
 def test_main_function_todoist_api_non_dryrun(config_json):

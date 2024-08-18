@@ -18,7 +18,7 @@ class ReminderTime(BaseModel):
     @property
     def datetime_components(self) -> dict[str, int]:
         """ Get components for the datetime initializer """
-        return self.dict(include={'hour', 'minute', 'second'}, exclude_unset=True)
+        return self.model_dump(include={'hour', 'minute', 'second'}, exclude_unset=True)
 
     @property
     def has_datetime_components(self):
@@ -28,4 +28,4 @@ class ReminderTime(BaseModel):
     @property
     def timedelta_components(self):
         """ Get components for the timedelta initializer """
-        return self.dict(include={'day_offset', 'hour_offset', 'minute_offset', 'second_offset'}, by_alias=True, exclude_unset=True)
+        return self.model_dump(include={'day_offset', 'hour_offset', 'minute_offset', 'second_offset'}, by_alias=True, exclude_unset=True)

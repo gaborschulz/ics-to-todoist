@@ -10,8 +10,7 @@ from ics import Calendar
 from pydantic import ValidationError
 from rich.console import Console
 from rich.progress import Progress
-from synctodoist import TodoistAPI
-from synctodoist.exceptions import TodoistError
+from todoist_api_python.api import TodoistAPI
 
 from ics_to_todoist.models import Event, Configuration
 from ics_to_todoist.todoist_helper import upload_events
@@ -88,14 +87,10 @@ def main(ics_file: str,
         if len(events) == 0:
             raise typer.Exit(0)
     with console.status('Syncing with Todoist...'):
-        api = TodoistAPI(api_key=config.todoist_api_key)  # types: ignore
-        api.sync()
+        api = TodoistAPI(token=config.todoist_api_key)  # types: ignore
         try:
-            project = api.projects.find(pattern=config.target_project)
+            project = [x for x in api.get_projects() if x.name == config.target_project][0]
             console.print(f'Found target project [bold yellow]{config.target_project}[/bold yellow]: {project.name}')
-        except TodoistError:
-            console.print(f'[bold red]ERROR[/bold red]: Project {config.target_project} was not found')
-            raise typer.Exit(1)  # pylint: disable=raise-missing-from
         except Exception as ex:
             console.print(f'ERROR: {ex}')
             raise typer.Exit(1)
