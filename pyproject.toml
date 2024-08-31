@@ -27,8 +27,6 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Utilities"
 ]  # https://pypi.org/classifiers/
@@ -66,6 +64,7 @@ dev = [
     "coverage-badge>=1.1.2",
     "types-setuptools>=74.0.0.20240831",
 ]
+bump2version = []
 
 [tool.bandit]
 exclude_dirs = ["archive", "tests", ".venv"]

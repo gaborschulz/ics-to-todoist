@@ -38,24 +38,17 @@ bump_version() {
     echo "Argument: $1 / $#"
     if [[ "$#" -eq 0 ]]; then
         echo "No version bump"
-        VERSION_BUMPED=0
+        NEW_VERSION=$(cat VERSION) && \
+        echo "New version: $NEW_VERSION" && \
         return 0
     fi
 
-    echo "Bumping version from $(poetry version)"
-    poetry version $1 && \
-    poetry version && \
+    bump2version $1 && \
 
-    COMMIT_MESSAGE="Committing version $(poetry version --short)" && \
-    echo -ne "${QUESTION_FLAG} ${CYAN}Enter a custom commit/release message [${WHITE}$COMMIT_MESSAGE${CYAN}]: "
-    read INPUT_STRING
-    if [ "$INPUT_STRING" = "" ]; then
-        INPUT_STRING=$COMMIT_MESSAGE
-    fi
-
-    git commit -am "$INPUT_STRING" && \
-    git tag -a v$(poetry version --short) -m "$INPUT_STRING" && \
-    VERSION_BUMPED=1
+    NEW_VERSION=$(cat VERSION) && \
+    echo "New version: $NEW_VERSION" && \
+    git push --tags -u origin $(git branch --show-current) && \
+    gh release create v$NEW_VERSION --generate-notes
 }
 
 push() {

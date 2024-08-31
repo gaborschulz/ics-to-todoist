@@ -2,10 +2,10 @@
 # It is not intended for manual editing.
 
 [metadata]
-groups = ["default", "dev", "docs"]
+groups = ["default", "bump2version", "dev", "docs"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:9e8198bdd5a178ccda01e32d42f55d1354f9a8f4f28e59d154fd34a2c6a51501"
+content_hash = "sha256:e9663389de88bf6814a8ee0c30f65189129ab769a44047c983982adb65af847e"
 
 [[metadata.targets]]
 requires_python = ">=3.12"

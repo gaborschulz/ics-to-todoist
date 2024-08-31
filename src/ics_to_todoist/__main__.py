@@ -4,7 +4,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-import pkg_resources
 import typer
 from ics import Calendar
 from pydantic import ValidationError
@@ -17,7 +16,7 @@ from ics_to_todoist.todoist_helper import upload_events
 
 app = typer.Typer()
 
-__version__ = pkg_resources.get_distribution("ics-to-todoist").version
+__version__ = '0.5.1'
 
 
 def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
