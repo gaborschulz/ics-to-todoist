@@ -53,7 +53,7 @@ bump_version() {
 
 push() {
     git push && \
-    git push origin v$(poetry version --short)
+    git push origin v$(cat VERSION)
 }
 
 release_to_pypi() {
@@ -62,7 +62,7 @@ release_to_pypi() {
     fi
 
     pdm publish
-    gh release create v$(poetry version --short) --generate-notes
+    gh release create v$(cat VERSION) --generate-notes
 }
 
 load_env &&
