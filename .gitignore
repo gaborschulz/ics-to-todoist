@@ -227,3 +227,5 @@ fabric.properties
 .env.test
 
 private/
+
+ruff.xml
