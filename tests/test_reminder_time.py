@@ -1,4 +1,5 @@
 # pylint: disable-all
+# type: ignore
 import pytest
 
 from ics_to_todoist.models import ReminderTime

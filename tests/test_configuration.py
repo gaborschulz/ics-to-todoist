@@ -39,4 +39,4 @@ def test_missing_todoist_api_key_raises_validation_error(monkeypatch, config_jso
     if os.getenv('TODOIST_API_KEY', ''):
         monkeypatch.delenv('TODOIST_API_KEY')
     with pytest.raises(Exception):
-        config = Configuration(**config_json, )
+        _ = Configuration(**config_json, )

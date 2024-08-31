@@ -1,5 +1,4 @@
 # pylint: disable-all
-import os
 import tomllib
 from datetime import datetime
 from pathlib import Path
@@ -158,7 +157,6 @@ def test_main_function_invalid_project_name(monkeypatch):
 
 
 def test_main_function_todoist_api_non_dryrun(config_json):
-    todoist_api_key = os.getenv('TODOIST_API_KEY')
     runner = CliRunner()
     result = runner.invoke(app, ['data/test.ics', '--config-file', 'data/test_config.toml'])
     assert f'Found target project {config_json["target_project"]}:' in result.stdout
