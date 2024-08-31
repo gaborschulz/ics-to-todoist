@@ -16,7 +16,7 @@ from ics_to_todoist.todoist_helper import upload_events
 
 app = typer.Typer()
 
-__version__ = '0.6.1'
+__version__ = '0.6.2'
 
 
 def load_ics_data(ics_file: str, config: Configuration) -> list[Event]:
