@@ -68,7 +68,7 @@ release_to_pypi() {
         echo "No PyPI release without version bump"
     fi
 
-    poetry publish --build
+    pdm publish
     gh release create v$(poetry version --short) --generate-notes
 }
 
