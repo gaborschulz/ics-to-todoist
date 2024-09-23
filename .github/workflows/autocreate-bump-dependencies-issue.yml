@@ -3,7 +3,7 @@ name: autocreate-bump-dependencies-issue
 on:
     workflow_dispatch:
     schedule:
-        -   cron: "17 2 1 * *"
+        -   cron: "17 2 1 */2 *"
 
 jobs:
     create_issue:
