@@ -1,0 +1,27 @@
+name: auto-assign-issues
+
+on:
+    workflow_dispatch:
+    issues:
+        types:
+        - opened
+
+jobs:
+    auto_assign_issues:
+        name: Auto-assign issues
+        runs-on: ubuntu-latest
+        permissions:
+            issues: write
+        steps:
+            -   name: Auto-assign issues
+                run: |
+                    issues=$(gh issue list --limit 10000 --state open --json number,assignees | jq '.[] | select(.assignees == []).number')
+
+                    while IFS= read -r line; do
+                        echo "... $line ..."
+                        gh issue edit --add-assignee "@me" $line
+                    done <<< "$issues"
+                env:
+                    GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+                    GH_REPO: ${{ github.repository }}
+                    
