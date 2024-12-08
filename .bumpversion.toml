@@ -1,5 +1,5 @@
 [tool.bumpversion]
-current_version = "24.11"
+current_version = "24.12"
 commit = true
 tag = true
 parse = """(?x)                     # Verbose mode

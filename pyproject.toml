@@ -1,6 +1,6 @@
 [project]
 name = "ics-to-todoist"
-version = "24.11"
+version = "24.12"
 description = "A command line tool to convert entries from an .ics file to tasks in Todoist."
 authors = [
     { name = "Gabor Schulz" },
