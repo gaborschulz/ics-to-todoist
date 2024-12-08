@@ -33,4 +33,4 @@ For licensing details, please, see [LICENSE.md](LICENSE.md)
 
 ## Copyright
 
-Copyright Gabor Schulz, 2022
+Copyright Gabor Schulz, 2022 - 2024

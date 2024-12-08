@@ -1,0 +1,25 @@
+[tool.bumpversion]
+current_version = "24.11"
+commit = true
+tag = true
+parse = """(?x)                     # Verbose mode
+    (?P<release>                    # The release part
+        (?:[1-9][0-9]{1})\\.        # YY.
+        (?:1[0-2]|[1-9])            # MM
+    )
+    (?:\\.(?P<patch>\\d+))?         # .patch, optional
+"""
+serialize = ["{release}.{patch}", "{release}"]
+
+[tool.bumpversion.parts.release]
+calver_format = "{YY}.{MM}"
+
+[[tool.bumpversion.files]]
+filename = "VERSION"
+
+[[tool.bumpversion.files]]
+filename = "src/ics_to_todoist/__main__.py"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+

@@ -38,12 +38,10 @@ bump_version() {
     echo "Argument: $1 / $#"
     if [[ "$#" -eq 0 ]]; then
         echo "No version bump"
-        NEW_VERSION=$(cat VERSION) && \
-        echo "New version: $NEW_VERSION" && \
         return 0
     fi
 
-    bump2version $1 && \
+    bump-my-version bump $1 && \
 
     NEW_VERSION=$(cat VERSION) && \
     echo "New version: $NEW_VERSION" && \
