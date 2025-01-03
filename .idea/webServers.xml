@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7a9819c0-7617-4fbb-8d46-5f88abfe89d8" name="n-nas" url="http://localhost">
+        <fileTransfer mountedRoot="/Volumes/Development/ics-to-todoist" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

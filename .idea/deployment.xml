@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="n-nas" deleteMissingItems="true" createEmptyFolders="true" exclude=".svn;.cvs;.DS_Store;.hg;*.hprof;*.pyc;.mypy_cache;.pytest_cache;.ruff_cache" preserveFilePermissions="true" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="n-nas">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
